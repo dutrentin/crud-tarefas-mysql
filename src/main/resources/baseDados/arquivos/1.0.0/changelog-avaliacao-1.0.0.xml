@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="1.0.0" author="Eduardo Trentin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PERSON"/>
+            </not>
+        </preConditions>
+        <comment>Padrão para arquitetura de API - Tabela PERSON</comment>
+        <sql>
+            CREATE TABLE PERSON (
+            CD_PERSON  INTEGER NOT NULL ,
+            NM_PERSON VARCHAR(50),
+            DS_EMAIL VARCHAR(100),
+            PRIMARY KEY (CD_PERSON)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE PERSON;
+            </sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="Eduardo Trentin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="TASK"/>
+            </not>
+        </preConditions>
+        <comment>Padrão para arquitetura de API - Tabela </comment>
+        <sql>
+            CREATE TABLE TASK (
+            CD_TASK INTEGER NOT NULL ,
+            CD_PERSON  INTEGER NOT NULL ,
+            DS_TASK VARCHAR(2000),
+            FG_ACTIVE INTEGER,
+            DT_CREATION DATE,
+            DT_CONCLUSION DATE,
+            DT_TASK DATE,
+            DS_TITLE VARCHAR(255),
+            PRIMARY KEY (CD_TASK)
+            );
+        </sql>
+        <rollback>
+            <sql>
+                DROP TABLE TASK;
+            </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
